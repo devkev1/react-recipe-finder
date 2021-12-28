@@ -14,14 +14,15 @@ const Container = styled.div `
 
 function App() {
   const [timeoutId, updateTimeoutId] = useState();
-
-  const fetchRecipe = (searchString)=> {
-    Axios.get(`{}`)
-  }
+  
+  const fetchRecipe = async(searchString)=> {
+    const response = await Axios.get(`https://api.edamam.com/api/recipes/v2?app_id=${APP_ID}&app_key=${APP_KEY}&type=public`);
+    console.log(response);
+  };
 
   const onTextChange = (e) => {
     clearTimeout(timeoutId);
-    const timeout = setTimeout(() => console.log("API call"), 500);
+    setTimeout(() => fetchRecipe(e.target.value), 500);
     updateTimeoutId(timeoutId)
   };
 
