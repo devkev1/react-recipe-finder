@@ -60,7 +60,7 @@ function App() {
       <RecipeListContainer>
         {recipeList.length &&
           recipeList.map(({ recipe }) => (
-            <RecipeContainer recipeObj={recipe}>
+            <RecipeContainer key={recipe.label + recipe.calories} recipeObj={recipe}>
               <CoverImage src={recipe.image} />
               <RecipeName>{recipe.label}</RecipeName>
               <IngredientsText>Ingredients</IngredientsText>
