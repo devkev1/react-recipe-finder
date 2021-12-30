@@ -32,11 +32,11 @@ function App() {
 
   const fetchRecipe = async (searchString) => {
     const response = await Axios.get(
-      `https://api.edamam.com/api/recipes/v2?app_id=${APP_ID}&app_key=${APP_KEY}&type=public`
+      `https://api.edamam.com/search?q=${searchString}&app_id=${APP_ID}&app_key=${APP_KEY}`
     );
     console.log(response.data);
-    updatedRecipeList([{name: "test"}]);
-    //response.data.hits
+    updatedRecipeList(response.data.hits);
+    //[{name: "test"}]
   };
 
   const onTextChange = (e) => {
@@ -60,11 +60,11 @@ function App() {
       <RecipeListContainer>
         {recipeList.length &&
           recipeList.map((recipeObj) => (
-            <RecipeContainer recipeObj={recipeObj}>
-              <CoverImage src="/hamburger-icon.svg" />
-              <RecipeName>{recipeObj.name}</RecipeName>
-              <IngredientsText>{recipeObj.ingredients}</IngredientsText>
-              <SeeMoreText>{}</SeeMoreText>{" "}
+            <RecipeContainer recipeObj={recipeObj.recipe}>
+              <CoverImage src={recipeObj.image} />
+              <RecipeName>{recipeObj.label}</RecipeName>
+              <IngredientsText>Ingredients</IngredientsText>
+              <SeeMoreText onClick={()=>window.open(recipeObj.url)}>See Complete Recipe</SeeMoreText>{" "}
             </RecipeContainer>
           ))}
       </RecipeListContainer>
