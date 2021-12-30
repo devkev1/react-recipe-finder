@@ -59,12 +59,12 @@ function App() {
       </Header>
       <RecipeListContainer>
         {recipeList.length &&
-          recipeList.map((recipeObj) => (
-            <RecipeContainer recipeObj={recipeObj.recipe}>
-              <CoverImage src={recipeObj.image} />
-              <RecipeName>{recipeObj.label}</RecipeName>
+          recipeList.map(({ recipe }) => (
+            <RecipeContainer key={recipe.label + recipe.calories} recipeObj={recipe}>
+              <CoverImage src={recipe.image} />
+              <RecipeName>{recipe.label}</RecipeName>
               <IngredientsText>Ingredients</IngredientsText>
-              <SeeMoreText onClick={()=>window.open(recipeObj.url)}>See Complete Recipe</SeeMoreText>{" "}
+              <SeeMoreText onClick={()=>window.open(recipe.url)}>See Complete Recipe</SeeMoreText>{" "}
             </RecipeContainer>
           ))}
       </RecipeListContainer>
