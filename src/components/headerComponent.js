@@ -27,7 +27,6 @@ export const AppIcon = styled.img `
 export const SearchIcon = styled.img `
   width: 32px;
   height: 32px;
-  cursor: pointer;
 `;
 
 export const SearchComponent = styled.div `
