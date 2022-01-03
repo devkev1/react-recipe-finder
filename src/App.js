@@ -38,9 +38,8 @@ const Placeholder = styled.img`
 `;
 
 function App() {
-  const [timeoutId, updateTimeoutId] = useState();
   const [recipeList, updatedRecipeList] = useState([]);
-  const [show, setShow] = useState(false);
+  const [shownRecipe, setShownRecipe] = useState(null);
 
   const fetchRecipe = async (searchString) => {
     const response = await Axios.get(
@@ -50,10 +49,9 @@ function App() {
     updatedRecipeList(response.data.hits);
   };
 
-  const onTextChange = (e) => {
-    clearTimeout(timeoutId);
-    setTimeout(() => fetchRecipe(e.target.value), 500);
-    updateTimeoutId(timeoutId);
+  const onSearch = (e) => {
+    e.preventDefault();
+    fetchRecipe(document.getElementById("result").value);
   };
 
   return (
@@ -63,10 +61,12 @@ function App() {
           <AppIcon src="/hamburger-icon.svg" />
           Recipe Finder
         </AppNameComponent>
+        <form onSubmit={onSearch}>
         <SearchComponent>
-          <SearchIcon src="/search-icon.svg" />
-          <SearchInput placeholder="Search Recipes" onChange={onTextChange} />
+          <SearchIcon onClick={onSearch} src="/search-icon.svg" />
+          <SearchInput id = "result" placeholder="Search Recipes" />
         </SearchComponent>
+        </form>
       </Header>
       <RecipeListContainer>
         <>
@@ -76,38 +76,9 @@ function App() {
                 key={recipe.label + recipe.calories}
                 recipeObj={recipe}
               >
-                <Dialog open={show}>
-                  <DialogTitle id="alert-dialog-slide-title">
-                    Ingredients
-                  </DialogTitle>
-                  <DialogContent>
-                    <DialogActions>
-                      <IngredientsText onClick={() => window.open(recipe.url)}>
-                        See More
-                      </IngredientsText>
-                      <SeeMoreText onClick={() => setShow("")}>
-                        Close
-                      </SeeMoreText>
-                    </DialogActions>
-                    <table>
-                      <thead>
-                        <th>Ingredients</th>
-                        <th>Weight</th>
-                      </thead>
-                      <tbody>
-                        {recipe.ingredients.map((ingredient) => (
-                          <tr>
-                            <td>{ingredient.text}</td>
-                            <td>{ingredient.weight}</td>
-                          </tr>
-                        ))}
-                      </tbody>
-                    </table>
-                  </DialogContent>
-                </Dialog>
                 <CoverImage src={recipe.image} />
                 <RecipeName>{recipe.label}</RecipeName>
-                <IngredientsText onClick={() => setShow(true)}>
+                <IngredientsText onClick={() => setShownRecipe(recipe)}>
                   Ingredients
                 </IngredientsText>
                 <SeeMoreText onClick={() => window.open(recipe.url)}>
@@ -120,6 +91,35 @@ function App() {
           )}
         </>
       </RecipeListContainer>
+      <Dialog open={shownRecipe ? true : false}>
+        <DialogTitle id="alert-dialog-slide-title">Ingredients</DialogTitle>
+        <DialogContent>
+          <DialogActions>
+            <IngredientsText onClick={() => window.open(shownRecipe?.url)}>
+              See More
+            </IngredientsText>
+            <SeeMoreText onClick={() => setShownRecipe(null)}>
+              Close
+            </SeeMoreText>
+          </DialogActions>
+          <table>
+            <thead>
+              <tr>
+                <th>Ingredients</th>
+                <th>Weight</th>
+              </tr>
+            </thead>
+            <tbody>
+              {shownRecipe?.ingredients.map((ingredient, i) => (
+                <tr key={ingredient.foodId + i}>
+                  <td>{ingredient.text}</td>
+                  <td>{ingredient.weight.toFixed(2)}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </DialogContent>
+      </Dialog>
     </Container>
   );
 }

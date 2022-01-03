@@ -27,6 +27,7 @@ export const AppIcon = styled.img `
 export const SearchIcon = styled.img `
   width: 32px;
   height: 32px;
+  cursor: pointer;
 `;
 
 export const SearchComponent = styled.div `
@@ -35,7 +36,7 @@ export const SearchComponent = styled.div `
   background-color: white;
   padding: 10px;
   border-radius: 6px;
-  width: 50%;
+  width: fit-content;
 `;
 
 export const SearchInput = styled.input `
