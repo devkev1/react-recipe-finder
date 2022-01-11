@@ -5,6 +5,7 @@ import Dialog from "@material-ui/core/Dialog";
 import DialogContent from "@material-ui/core/DialogContent";
 import DialogActions from "@material-ui/core/DialogActions";
 import styled from "styled-components";
+
 import {
   Header,
   AppNameComponent,
@@ -42,11 +43,15 @@ function App() {
   const [shownRecipe, setShownRecipe] = useState(null);
 
   const fetchRecipe = async (searchString) => {
-    const response = await Axios.get(
-      `https://api.edamam.com/search?q=${searchString}&app_id=${APP_ID}&app_key=${APP_KEY}`
-    );
-    console.log(response.data);
-    updatedRecipeList(response.data.hits);
+    try {
+      const response = await Axios.get(
+        `https://api.edamam.com/search?q=${searchString}&app_id=${APP_ID}&app_key=${APP_KEY}`
+      );
+      console.log(response.data);
+      updatedRecipeList(response.data.hits);
+    } catch (err) {
+      alert("Something went wrong!");
+    }
   };
 
   const onSearch = (e) => {
@@ -62,10 +67,10 @@ function App() {
           Recipe Finder
         </AppNameComponent>
         <form onSubmit={onSearch}>
-        <SearchComponent>
-          <SearchIcon onClick={onSearch} src="/search-icon.svg" />
-          <SearchInput id = "result" placeholder="Search Recipes" />
-        </SearchComponent>
+          <SearchComponent>
+            <SearchIcon onClick={onSearch} src="/search-icon.svg" />
+            <SearchInput id="result" placeholder="Search Recipes" />
+          </SearchComponent>
         </form>
       </Header>
       <RecipeListContainer>
