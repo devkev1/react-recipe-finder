@@ -59,6 +59,16 @@ function App() {
     fetchRecipe(document.getElementById("result").value);
   };
 
+  const handleClose = () => setShownRecipe(null);
+
+  if (shownRecipe) {
+    document.keyup = (e) => {
+      if (e.keyup === "escape") setShownRecipe(null);
+    }
+  } else {
+    document.keyup = null;
+  }
+
   return (
     <Container>
       <Header>
@@ -96,7 +106,7 @@ function App() {
           )}
         </>
       </RecipeListContainer>
-      <Dialog open={shownRecipe ? true : false}>
+      <Dialog open={shownRecipe ? true : false} onClose={handleClose}>
         <DialogTitle id="alert-dialog-slide-title">Ingredients</DialogTitle>
         <DialogContent>
           <DialogActions>
