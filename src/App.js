@@ -14,6 +14,7 @@ import {
   SearchComponent,
   SearchInput,
 } from "./components/headerComponent";
+
 import {
   RecipeListContainer,
   RecipeContainer,
@@ -21,6 +22,7 @@ import {
   RecipeName,
   IngredientsText,
   SeeMoreText,
+  Button,
 } from "./components/recipeComponent";
 
 const APP_ID = "c9d4abe1";
@@ -41,18 +43,28 @@ const Placeholder = styled.img`
 function App() {
   const [recipeList, updatedRecipeList] = useState([]);
   const [shownRecipe, setShownRecipe] = useState(null);
+  const [from, setFrom] = useState(0);
 
-  const fetchRecipe = async (searchString) => {
+  const fetchRecipe = async (searchString, dir=0) => {
     try {
       const response = await Axios.get(
-        `https://api.edamam.com/search?q=${searchString}&app_id=${APP_ID}&app_key=${APP_KEY}`
+        `https://api.edamam.com/search?q=${searchString}&app_id=${APP_ID}&app_key=${APP_KEY}&from=${from+dir}`
       );
       console.log(response.data);
+      setFrom(response.data.from);
       updatedRecipeList(response.data.hits);
     } catch (err) {
       alert("Something went wrong!");
     }
   };
+
+  const prevResults = () => {
+    fetchRecipe(document.getElementById("result").value, -10);
+  }
+
+  const nextResults = () => {
+    fetchRecipe(document.getElementById("result").value, 10);
+  }
 
   const onSearch = (e) => {
     e.preventDefault();
@@ -60,14 +72,6 @@ function App() {
   };
 
   const handleClose = () => setShownRecipe(null);
-
-  if (shownRecipe) {
-    document.keyup = (e) => {
-      if (e.keyup === "escape") setShownRecipe(null);
-    }
-  } else {
-    document.keyup = null;
-  }
 
   return (
     <Container>
@@ -83,6 +87,10 @@ function App() {
           </SearchComponent>
         </form>
       </Header>
+      <div style={{textAlign: "center", display: recipeList.length === 0 ? "none": "block"}}>
+      <Button disabled={from <= 0} onClick={prevResults}>Previous</Button>
+      <Button onClick={nextResults}>Next</Button>
+      </div>
       <RecipeListContainer>
         <>
           {recipeList.length ? (

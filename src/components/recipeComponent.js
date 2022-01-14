@@ -5,6 +5,7 @@ export const RecipeListContainer = styled.div `
   flex-direction: row;
   flex-wrap: wrap;
   padding: 30px;
+  margin-top: -32px;
   gap: 20px;
   justify-content: space-evenly;
 `;
@@ -45,3 +46,17 @@ export const SeeMoreText = styled(IngredientsText)`
   color: #eb3300;
   border: solid 1px #eb3300;
 `;
+
+export const Button = styled.button `
+background-color: #4CAF50;
+border: none;
+color: white;
+padding: 15px 32px;
+text-align: center;
+text-decoration: none;
+display: inline-block;
+font-size: 16px;
+margin: 34px 10px;
+cursor: pointer;
+width: 200px;
+`
