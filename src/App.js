@@ -45,10 +45,12 @@ function App() {
   const [shownRecipe, setShownRecipe] = useState(null);
   const [from, setFrom] = useState(0);
 
-  const fetchRecipe = async (searchString, dir=0) => {
+  const fetchRecipe = async (searchString, dir = 0) => {
     try {
       const response = await Axios.get(
-        `https://api.edamam.com/search?q=${searchString}&app_id=${APP_ID}&app_key=${APP_KEY}&from=${from+dir}`
+        `https://api.edamam.com/search?q=${searchString}&app_id=${APP_ID}&app_key=${APP_KEY}&from=${
+          from + dir
+        }`
       );
       console.log(response.data);
       setFrom(response.data.from);
@@ -60,11 +62,11 @@ function App() {
 
   const prevResults = () => {
     fetchRecipe(document.getElementById("result").value, -10);
-  }
+  };
 
   const nextResults = () => {
     fetchRecipe(document.getElementById("result").value, 10);
-  }
+  };
 
   const onSearch = (e) => {
     e.preventDefault();
@@ -87,9 +89,16 @@ function App() {
           </SearchComponent>
         </form>
       </Header>
-      <div style={{textAlign: "center", display: recipeList.length === 0 ? "none": "block"}}>
-      <Button disabled={from <= 0} onClick={prevResults}>Previous</Button>
-      <Button onClick={nextResults}>Next</Button>
+      <div
+        style={{
+          textAlign: "center",
+          display: recipeList.length === 0 ? "none" : "block",
+        }}
+      >
+        <Button disabled={from <= 0} onClick={prevResults}>
+          Previous
+        </Button>
+        <Button onClick={nextResults}>Next</Button>
       </div>
       <RecipeListContainer>
         <>
