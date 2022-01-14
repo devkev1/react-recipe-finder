@@ -58,5 +58,5 @@ display: inline-block;
 font-size: 16px;
 margin: 34px 10px;
 cursor: pointer;
-width: 200px;
+width: 150px;
 `
