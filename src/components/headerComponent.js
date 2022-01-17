@@ -54,5 +54,6 @@ export const SearchInput = styled.input `
   font-weight: bold;
   @media (max-width: 768px) {
     margin-left: 5px;
+    font-size: 14px;
   }
 `;
