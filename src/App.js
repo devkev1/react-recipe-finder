@@ -123,6 +123,17 @@ function App() {
           )}
         </>
       </RecipeListContainer>
+      <div
+        style={{
+          textAlign: "center",
+          display: recipeList.length === 0 ? "none" : "block",
+        }}
+      >
+        <Button disabled={from <= 0} onClick={prevResults}>
+          Previous
+        </Button>
+        <Button onClick={nextResults}>Next</Button>
+      </div>
       <Dialog open={shownRecipe ? true : false} onClose={handleClose}>
         <DialogTitle id="alert-dialog-slide-title">Ingredients</DialogTitle>
         <DialogContent>
@@ -148,7 +159,7 @@ function App() {
                   <td>{ingredient.weight.toFixed(2)}</td>
                 </tr>
               ))}
-            </tbody>
+            </tbody> 
           </table>
         </DialogContent>
       </Dialog>

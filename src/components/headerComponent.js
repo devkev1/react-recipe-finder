@@ -22,6 +22,7 @@ export const AppIcon = styled.img `
   width: 36px;
   height: 36px;
   margin: 15px;
+  margin-left: 2px;
 `;
 
 export const SearchIcon = styled.img `
