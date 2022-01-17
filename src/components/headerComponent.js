@@ -40,7 +40,7 @@ export const SearchComponent = styled.div `
   border-radius: 6px;
   width: fit-content;
   @media (max-width: 768px) {
-    width: 150px;
+    width: 152px;
     margin-left: 12px;
   }
 `;
