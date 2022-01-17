@@ -4,7 +4,7 @@ export const RecipeListContainer = styled.div `
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
-  padding: 30px;
+  padding: 30px 30px 0 30px;
   margin-top: -32px;
   gap: 20px;
   justify-content: space-evenly;
@@ -56,7 +56,7 @@ text-align: center;
 text-decoration: none;
 display: inline-block;
 font-size: 16px;
-margin: 34px 10px;
+margin: 34px 10px 24px;
 cursor: pointer;
 width: 150px;
 `
