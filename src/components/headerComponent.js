@@ -48,7 +48,7 @@ export const SearchComponent = styled.div `
   width: fit-content;
   @media (max-width: 768px) {
     width: 160px;
-    height: 18px;
+    height: 20px;
     margin-right: 10px;
   }
 `;
@@ -62,6 +62,6 @@ export const SearchInput = styled.input `
   font-weight: bold;
   @media (max-width: 768px) {
     margin-left: 5px;
-    font-size: 14px;
+    font-size: 12px;
   }
 `;
