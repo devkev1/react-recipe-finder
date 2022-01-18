@@ -34,8 +34,8 @@ export const SearchIcon = styled.img `
   height: 32px;
   cursor: pointer;
   @media (max-width: 768px) {
-    width: 20px;
-    height: 30px;
+    height: 18px;
+    width: 18px;
   }
 `;
 
@@ -48,7 +48,7 @@ export const SearchComponent = styled.div `
   width: fit-content;
   @media (max-width: 768px) {
     width: 160px;
-    height: 30px;
+    height: 18px;
     margin-right: 10px;
   }
 `;
