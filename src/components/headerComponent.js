@@ -45,7 +45,7 @@ export const SearchComponent = styled.div `
   @media (max-width: 768px) {
     width: 160px;
     height: 30px;
-    margin-left: 12px;
+    margin-right: 10px;
   }
 `;
 
