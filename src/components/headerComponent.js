@@ -13,6 +13,9 @@ export const Header = styled.div`
   font-size: 25px;
   font-weight: bold;
   box-shadow: 0 3px 6px 0 #555;
+  @media (max-width: 768px) {
+   padding: 8px;
+  }
 `;
 
 export const AppNameComponent = styled.div `
@@ -41,6 +44,7 @@ export const SearchComponent = styled.div `
   width: fit-content;
   @media (max-width: 768px) {
     width: 160px;
+    height: 30px;
     margin-left: 12px;
   }
 `;
