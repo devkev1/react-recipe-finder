@@ -33,6 +33,10 @@ export const SearchIcon = styled.img `
   width: 32px;
   height: 32px;
   cursor: pointer;
+  @media (max-width: 768px) {
+    width: 20px;
+    height: 30px;
+  }
 `;
 
 export const SearchComponent = styled.div `
