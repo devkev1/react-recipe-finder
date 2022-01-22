@@ -148,14 +148,12 @@ function App() {
             <thead>
               <tr>
                 <th>Ingredients</th>
-                <th>Weight</th>
               </tr>
             </thead>
             <tbody>
               {shownRecipe?.ingredients.map((ingredient, i) => (
                 <tr key={ingredient.foodId + i}>
                   <td>{ingredient.text}</td>
-                  <td>{ingredient.weight.toFixed(2)}</td>
                 </tr>
               ))}
             </tbody> 
