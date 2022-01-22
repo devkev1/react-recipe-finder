@@ -52,7 +52,6 @@ function App() {
           from + dir
         }`
       );
-      console.log(response.data);
       setFrom(response.data.from);
       updatedRecipeList(response.data.hits);
     } catch (err) {
